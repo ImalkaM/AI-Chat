@@ -102,7 +102,7 @@
 				AC6F11692F4B81C400254A6A /* Sources */,
 				AC6F116A2F4B81C400254A6A /* Frameworks */,
 				AC6F116B2F4B81C400254A6A /* Resources */,
-				AC6F11A12F4C428700254A6A /* ShellScript */,
+				AC6F11A12F4C428700254A6A /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -233,7 +233,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AC6F11A12F4C428700254A6A /* ShellScript */ = {
+		AC6F11A12F4C428700254A6A /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -243,6 +243,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (

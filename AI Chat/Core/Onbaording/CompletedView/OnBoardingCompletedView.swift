@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct OnBoardingCompletedView: View {
+    
+    @Environment(AppState.self) private var root
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Onboarding completed")
+                .frame(maxHeight: .infinity)
+            Button {
+                onFinishButtonPressed()
+            } label: {
+                Text("Finish")
+                    .callToActionButtonStyle()
+                    
+            }
+            .padding(16)
+        }
     }
+    
+    func onFinishButtonPressed() {
+        root.updateViewState(showTabBarView: true)
+    }
+    
 }
 
 #Preview {
     OnBoardingCompletedView()
+        .environment(AppState())
 }

@@ -1,3 +1,11 @@
+//
+//  AppState.swift
+//  AI Chat
+//
+//  Created by Imalka Muthukumara on 2026-03-10.
+//
+import SwiftUI
+
 @Observable
 class AppState {
     
