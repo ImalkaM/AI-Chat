@@ -6,10 +6,24 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ImageLoaderView: View {
+    
+    var url: String = Constants.randomImage
+    var resizeMode: ContentMode = .fill
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Rectangle()
+            .opacity(0)
+            .overlay {
+                WebImage(url: URL(string: url))
+                    .resizable()
+                    .indicator(.activity)
+                    .aspectRatio(contentMode: resizeMode)
+                    .allowsHitTesting(false)
+            }
+            .clipped()
     }
 }
 

@@ -16,4 +16,15 @@ extension View {
             .background(.accent)
             .cornerRadius(16)
     }
+    func callToSubButtonStyle() -> some View {
+        self
+            .font(.subheadline)
+            .foregroundStyle(.accent)
+            .frame(maxWidth: .infinity)
+    }
+    
+    func tappableBackground() -> some View {
+        self
+        .background(Color.black.opacity(0.001))
+    }
 }
