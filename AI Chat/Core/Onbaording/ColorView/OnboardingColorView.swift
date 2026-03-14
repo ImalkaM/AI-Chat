@@ -11,6 +11,8 @@ struct OnboardingColorView: View {
     
     @State private var selectedColor: Color?
     
+    @Environment(AppState.self) private var root
+    
     let profileColors: [Color] = [.black, .accent, .blue, .green, .yellow, .orange, .purple, .indigo, .pink ]
     
     var body: some View {
@@ -25,7 +27,7 @@ struct OnboardingColorView: View {
             content: {
                 ZStack {
                     if let selectedColor {
-                        ctaButtons
+                        ctaButtons(selectedColor: selectedColor)
                             .transition(AnyTransition.move(edge: .bottom))
                     }
                 }
@@ -34,6 +36,7 @@ struct OnboardingColorView: View {
             }
         )
         .animation(.smooth, value: selectedColor)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     private var colorGrid: some View {
@@ -68,9 +71,9 @@ struct OnboardingColorView: View {
         )
     }
     
-    private var ctaButtons: some View {
+    private func ctaButtons(selectedColor: Color) -> some View {
         NavigationLink {
-            OnBoardingCompletedView()
+            OnBoardingCompletedView(selectedColor: selectedColor)
         } label: {
             Text("Continue")
                 .callToActionButtonStyle()
@@ -81,4 +84,5 @@ struct OnboardingColorView: View {
 
 #Preview {
     OnboardingColorView()
+        .environment(AppState())
 }

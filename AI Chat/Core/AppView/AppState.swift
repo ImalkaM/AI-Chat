@@ -14,7 +14,7 @@ class AppState {
             UserDefaults.showTabBarView = showTabBar
         }
     }
-    
+
     init(showTabBar: Bool = UserDefaults.showTabBarView) {
         self.showTabBar = showTabBar
     }
@@ -28,6 +28,7 @@ extension UserDefaults {
     
     private struct Keys {
         static let showTabBarView = "showTabBarView"
+        static let appThemeColor = "appThemeColor"
     }
     
     static var showTabBarView: Bool {
