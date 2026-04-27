@@ -25,7 +25,7 @@ struct HeroCellView: View {
         .overlay(
             alignment: .bottomLeading,
             content: {
-                VStack(alignment: .leading,spacing: 4){
+                VStack(alignment: .leading,spacing: 4) {
                     if let title {
                         Text(title)
                             .font(.headline)
