@@ -12,7 +12,7 @@ struct CategoryCellView: View {
     var title = "Aliens"
     var imageName = Constants.randomImage
     var font: Font = .title2
-    var conrnerRadius: CGFloat = 16
+    var conrnerRadius: CGFloat = 14
     
     var body: some View {
         ImageLoaderView(url: imageName)

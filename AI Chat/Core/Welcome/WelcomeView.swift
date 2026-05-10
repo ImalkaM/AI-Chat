@@ -27,7 +27,7 @@ struct WelcomeView: View {
     }
     
     private var titleSection: some View {
-        VStack(spacing: 8){
+        VStack(spacing: 8) {
             Text("AI Chat")
                 .font(.largeTitle)
                 .fontWeight(.semibold)
@@ -35,7 +35,7 @@ struct WelcomeView: View {
     }
     
     @ViewBuilder private var ctaButtons : some View {
-        VStack(spacing: 8){
+        VStack(spacing: 8) {
             NavigationLink {
                 OnboardingIntroView()
             } label: {
