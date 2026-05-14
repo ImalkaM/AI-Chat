@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct AvatarModel:Hashable {
+struct AvatarModel: Hashable {
     
     let avatarId: String
     let name: String?
