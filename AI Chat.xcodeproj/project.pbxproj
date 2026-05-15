@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC503D9D2FB723B6007D8C43 /* SwiftfulUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = AC503D9C2FB723B6007D8C43 /* SwiftfulUtilities */; };
 		ACBC4BD82F61963200ADB381 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ACBC4BD72F61963200ADB381 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACBC4BD82F61963200ADB381 /* SDWebImageSwiftUI in Frameworks */,
+				AC503D9D2FB723B6007D8C43 /* SwiftfulUtilities in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,12 +79,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC503D9B2FB723B6007D8C43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AC6F11642F4B81C400254A6A = {
 			isa = PBXGroup;
 			children = (
 				AC6F116F2F4B81C400254A6A /* AI Chat */,
 				AC6F11812F4B81C600254A6A /* AI ChatTests */,
 				AC6F118B2F4B81C600254A6A /* AI ChatUITests */,
+				AC503D9B2FB723B6007D8C43 /* Frameworks */,
 				AC6F116E2F4B81C400254A6A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,6 +129,7 @@
 			name = "AI Chat";
 			packageProductDependencies = (
 				ACBC4BD72F61963200ADB381 /* SDWebImageSwiftUI */,
+				AC503D9C2FB723B6007D8C43 /* SwiftfulUtilities */,
 			);
 			productName = "AI Chat";
 			productReference = AC6F116D2F4B81C400254A6A /* AI Chat.app */;
@@ -204,6 +215,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				ACBC4BD62F61963200ADB381 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				ACEA15732FB71FCE00C9EFB8 /* XCRemoteSwiftPackageReference "SwiftfulUtilities" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AC6F116E2F4B81C400254A6A /* Products */;
@@ -634,9 +646,22 @@
 				minimumVersion = 3.1.4;
 			};
 		};
+		ACEA15732FB71FCE00C9EFB8 /* XCRemoteSwiftPackageReference "SwiftfulUtilities" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulUtilities.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AC503D9C2FB723B6007D8C43 /* SwiftfulUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACEA15732FB71FCE00C9EFB8 /* XCRemoteSwiftPackageReference "SwiftfulUtilities" */;
+			productName = SwiftfulUtilities;
+		};
 		ACBC4BD72F61963200ADB381 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ACBC4BD62F61963200ADB381 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

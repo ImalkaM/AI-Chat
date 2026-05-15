@@ -95,7 +95,7 @@ struct ProfileView: View {
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .removeListRowFormatting()
-            }else {
+            } else {
                 ForEach(myAvatars, id: \.self) { avatar in
                     CustomListCellView(
                         imageName: avatar.profileImageName,

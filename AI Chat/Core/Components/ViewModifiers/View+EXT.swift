@@ -7,6 +7,17 @@
 import SwiftUI
 
 extension View {
+    func badgeButton() -> some View {
+        self
+            .font(.caption)
+            .bold()
+            .foregroundStyle(Color.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background(Color.blue)
+            .cornerRadius(6)
+    }
+    
     func callToActionButtonStyle() -> some View {
         self
             .font(.headline)
