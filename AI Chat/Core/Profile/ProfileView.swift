@@ -31,7 +31,7 @@ struct ProfileView: View {
                 SettingsView()
             }
             .fullScreenCover(isPresented: $showCreateAvatarView) {
-                Text("Test")
+                CreateAvatarView()
             }
         }
         .task {
@@ -86,7 +86,7 @@ struct ProfileView: View {
                 Group {
                     if isLoading {
                         ProgressView()
-                    }else {
+                    } else {
                         Text("Click + to create an avatar")
                     }
                 }

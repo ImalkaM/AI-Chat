@@ -27,6 +27,15 @@ extension View {
             .background(.accent)
             .cornerRadius(16)
     }
+    func asyncCallToActionButton() -> some View {
+        self
+            .font(.headline)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
+            .background(.accent)
+            .cornerRadius(16)
+    }
     func callToSubButtonStyle() -> some View {
         self
             .font(.subheadline)
