@@ -12,9 +12,10 @@ struct ChatView: View {
     @State private var avatar: AvatarModel? = .mock
     @State private var currentUser: UserModel? = .mock
     @State private var textFieldText: String = ""
-    @State private var showConfirmationDialog: Bool = false
-    @State private var showChatSettings = false
     @State private var scrollPosition: String?
+    
+    @State private var showAlert: AnyAppAlert?
+    @State private var showChatSettings: AnyAppAlert?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -34,16 +35,8 @@ struct ChatView: View {
                     
             }
         }
-        .confirmationDialog("what would you like to do?", isPresented: $showChatSettings) {
-            Button("Report User / Chat", role: .destructive) {
-                
-            }
-            Button("Delete Chat", role: .destructive) {
-                
-            }
-        } message: {
-            Text("What would you like to do?")
-        }
+        .showCustomAlert(type: .confirmationDialog, alert: $showChatSettings)
+        .showCustomAlert(type: .alert, alert: $showAlert)
     }
     
     private var scrollViewSection: some View {
@@ -74,17 +67,16 @@ struct ChatView: View {
             .keyboardType(.alphabet)
             .autocorrectionDisabled()
             .padding(12)
-            .padding(.trailing,60)
+            .padding(.trailing, 60)
             .overlay(
-                Image(systemName:"arrow.up.circle.fill")
+                Image(systemName: "arrow.up.circle.fill")
                     .font(.system(size: 32))
-                    .padding(.trailing,4)
+                    .padding(.trailing, 4)
                     .foregroundStyle(.accent)
                     .anyButton(.plain, action: {
                         onSendMessagePressed()
                     })
-                
-                ,alignment:.trailing)
+                ,alignment: .trailing)
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 100)
@@ -94,9 +86,9 @@ struct ChatView: View {
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 }
             )
-            .padding(.horizontal,12)
-            .padding(.vertical,6)
-            .background(Color(uiColor:.secondarySystemBackground))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(Color(uiColor: .secondarySystemBackground))
     }
     
     private func onSendMessagePressed() {
@@ -105,24 +97,44 @@ struct ChatView: View {
         
         let content = textFieldText
         
-        let message = ChatMessageModel(
-            id: UUID().uuidString,
-            chatId: UUID().uuidString,
-            authorId: currentUser.userId,
-            content: content,
-            seenByIds: nil,
-            dateCreated: .now
-        )
-        
-        chatMessages.append(message)
-        
-        scrollPosition = message.id
-        
-        textFieldText = ""
+        do {
+            try TextValidationHelper.checkIftextIsValid(text: content)
+            
+            let message = ChatMessageModel(
+                id: UUID().uuidString,
+                chatId: UUID().uuidString,
+                authorId: currentUser.userId,
+                content: content,
+                seenByIds: nil,
+                dateCreated: .now
+            )
+            chatMessages.append(message)
+            
+            scrollPosition = message.id
+            
+            textFieldText = ""
+        } catch {
+            showAlert = AnyAppAlert(error: error)
+        }
     }
     
     private func onChatSettingsPressed() {
-        showChatSettings = true
+        showChatSettings = AnyAppAlert(
+            title: "",
+            subtitle: "What would you like to do?",
+            buttons: {
+                AnyView(
+                    Group {
+                        Button("Report User / Chat",role: .destructive) {
+                            
+                        }
+                        Button("Delete Chat",role: .destructive) {
+                            
+                        }
+                    }
+                )
+            }
+        )
     }
 }
 
