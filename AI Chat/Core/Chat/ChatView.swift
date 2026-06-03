@@ -16,7 +16,8 @@ struct ChatView: View {
     
     @State private var showAlert: AnyAppAlert?
     @State private var showChatSettings: AnyAppAlert?
-
+    @State private var showProfileModalView: Bool = false
+    
     var body: some View {
         VStack(spacing: 0) {
             scrollViewSection
@@ -28,15 +29,20 @@ struct ChatView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Image(systemName: "ellipsis")
                     .padding(8)
-                    .foregroundStyle(.accent)
                     .anyButton {
                         onChatSettingsPressed()
                     }
-                    
             }
         }
         .showCustomAlert(type: .confirmationDialog, alert: $showChatSettings)
         .showCustomAlert(type: .alert, alert: $showAlert)
+        .showModal(showModal: $showProfileModalView) {
+            if let avatar {
+                profileModal(avatar: avatar)
+                    .padding(40)
+                    .transition(.slide)
+            }
+        }
     }
     
     private var scrollViewSection: some View {
@@ -47,7 +53,10 @@ struct ChatView: View {
                     ChatBubbleViewBuilder(
                         message: message,
                         isCurrentUser: isCurrentUser,
-                        imageName: isCurrentUser ? nil : avatar?.profileImageName
+                        imageName: isCurrentUser ? nil : avatar?.profileImageName,
+                        onImagePressed: {
+                            onAvatarImagePressed()
+                        }
                     )
                     .id(message.id)
                 }
@@ -81,7 +90,6 @@ struct ChatView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 100)
                         .fill(Color(uiColor: .systemBackground))
-                    
                     RoundedRectangle(cornerRadius: 100)
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 }
@@ -125,16 +133,34 @@ struct ChatView: View {
             buttons: {
                 AnyView(
                     Group {
-                        Button("Report User / Chat",role: .destructive) {
+                        Button("Report User / Chat", role: .destructive) {
                             
                         }
-                        Button("Delete Chat",role: .destructive) {
+                        Button("Delete Chat", role: .destructive) {
                             
                         }
                     }
                 )
             }
         )
+    }
+    
+    private func profileModal(avatar: AvatarModel) -> some View{
+        ProfileModalView(
+            imageName: avatar.profileImageName,
+            title: avatar.name,
+            subtitle: avatar.characterOption?.rawValue.capitalized,
+            headline: avatar.characterDescription) {
+                onXMarkPressed()
+            }
+    }
+    
+    private func onAvatarImagePressed() {
+        showProfileModalView = true
+    }
+    
+    private func onXMarkPressed() {
+        showProfileModalView = false
     }
 }
 

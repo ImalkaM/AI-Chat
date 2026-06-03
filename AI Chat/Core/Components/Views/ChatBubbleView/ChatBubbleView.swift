@@ -14,6 +14,7 @@ struct ChatBubbleView: View {
     var backgroundColor: Color = Color(uiColor: .systemGray6)
     var showImage: Bool = true
     var imageName: String?
+    var onImagePressed: (() -> Void)?
     
     let offset: CGFloat = 14
     
@@ -23,6 +24,9 @@ struct ChatBubbleView: View {
                 ZStack {
                     if let imageName {
                         ImageLoaderView(url: imageName)
+                            .anyButton {
+                                onImagePressed?()
+                            }
                     } else {
                         Rectangle()
                             .fill(.secondary)
@@ -32,7 +36,6 @@ struct ChatBubbleView: View {
                 .clipShape(Circle())
                 .offset(y: offset)
             }
-            
             Text(text)
                 .font(.body)
                 .foregroundStyle(textColor)
@@ -50,8 +53,7 @@ struct ChatBubbleView: View {
         VStack(spacing: 16) {
             ChatBubbleView()
             ChatBubbleView(text: "This is a chat bubble with a lot of text that wraps to multiple lines and it keeps on going. This is a chat bubble with a lot of text that wraps to multiple lines and it keeps on going.")
-
-
+            
             ChatBubbleView(
                 textColor: .white,
                 backgroundColor: .accent,
