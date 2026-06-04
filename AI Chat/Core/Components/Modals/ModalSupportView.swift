@@ -4,7 +4,6 @@
 //
 //  Created by Imalka Muthukumara on 2026-06-03.
 //
-
 import SwiftUI
 
 struct ModalSupportView<Content: View>: View {
@@ -22,7 +21,8 @@ struct ModalSupportView<Content: View>: View {
                         showModal = false
                     }
                     .zIndex(1)
-                    content
+
+                content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
                     .zIndex(2)
@@ -34,38 +34,38 @@ struct ModalSupportView<Content: View>: View {
 }
 
 extension View {
-    func showModal(showModal: Binding<Bool>,@ViewBuilder content: () -> some View) -> some View {
+    
+    func showModal(showModal: Binding<Bool>, @ViewBuilder content: () -> some View) -> some View {
         self
-            .overlay(content: {
+            .overlay(
                 ModalSupportView(showModal: showModal) {
                     content()
                 }
-            })
+            )
     }
 }
 
-private struct PrivewView: View {
+private struct PreviewView: View {
     
     @State private var showModal: Bool = false
     
     var body: some View {
-        ZStack {
-            Button("Click Me"){
-                showModal = true
-            }
-            .frame(maxWidth: .infinity,maxHeight: .infinity)
-            .showModal(showModal: $showModal) {
-                RoundedRectangle(cornerRadius: 30)
-                    .padding(40)
-                    .padding(.vertical, 100)
-                    .onTapGesture {
-                        showModal = false
-                    }
-                    .transition(.slide)
-            }        }
+        Button("Click me") {
+            showModal = true
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .showModal(showModal: $showModal) {
+            RoundedRectangle(cornerRadius: 30)
+                .padding(40)
+                .padding(.vertical, 100)
+                .onTapGesture {
+                    showModal = false
+                }
+                .transition(.move(edge: .bottom))
+        }
     }
 }
 
 #Preview {
-    PrivewView()
+    PreviewView()
 }

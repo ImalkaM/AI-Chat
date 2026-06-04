@@ -12,19 +12,20 @@ struct ProfileModalView: View {
     var imageName: String? = Constants.randomImage
     var title: String? = "Alpha"
     var subtitle: String? = "Alien"
-    var headline: String? = "An alien in the park"
-    var onXMarkPressed: () -> Void
+    var headline: String? = "An alien in the park."
+    var onXMarkPressed: () -> Void = { }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if let imageName {
-                ImageLoaderView(url: imageName, forceTranasitionAnimation: true)
-                    .aspectRatio(1,contentMode: .fit)
-                    .overlay(alignment: .topTrailing) {
-                        
-                    }
+                ImageLoaderView(
+                    url: imageName,
+                    forceTranasitionAnimation: true
+                )
+                .aspectRatio(1, contentMode: .fit)
             }
-            VStack(alignment: .leading,spacing: 4) {
+            
+            VStack(alignment: .leading, spacing: 4) {
                 if let title {
                     Text(title)
                         .font(.title)
@@ -41,27 +42,40 @@ struct ProfileModalView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            .padding(.leading, 24)
-            .frame(maxWidth: .infinity,alignment: .leading)
+            .padding(24)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(.thinMaterial)
-        .frame(width: 300,height: 400)
         .cornerRadius(16)
-        .overlay(alignment: .topTrailing){
+        .overlay(
             Image(systemName: "xmark.circle.fill")
                 .font(.title)
                 .foregroundStyle(Color.black)
                 .padding(4)
                 .tappableBackground()
-                .anyButton(action: {
+                .anyButton {
                     onXMarkPressed()
-                })
-                .padding()
-        }
-        
+                }
+                .padding(8)
+            
+            , alignment: .topTrailing
+        )
     }
 }
 
-#Preview {
-    ProfileModalView(onXMarkPressed: {})
+#Preview("Modal w/ Image") {
+    ZStack {
+        Color.gray.ignoresSafeArea()
+        
+        ProfileModalView()
+            .padding(40)
+    }
+}
+#Preview("Modal w/out Image") {
+    ZStack {
+        Color.gray.ignoresSafeArea()
+        
+        ProfileModalView(imageName: nil)
+            .padding(40)
+    }
 }
