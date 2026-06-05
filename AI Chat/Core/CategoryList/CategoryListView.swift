@@ -12,6 +12,7 @@ struct CategoryListView: View {
     var category: CharacterOption = .alien
     var imageName: String = Constants.randomImage
     @State private var avatars: [AvatarModel] = AvatarModel.mocks
+    @Binding var path: [NavigationOption]
     
     var body: some View {
         ZStack {
@@ -32,7 +33,7 @@ struct CategoryListView: View {
                         subtitle: avatar.characterDescription
                     )
                     .anyButton(.highlight) {
-                        //
+                        onPressCategoryListView(avatar: avatar)
                     }
                     .removeListRowFormatting()
                 }
@@ -41,8 +42,12 @@ struct CategoryListView: View {
             .listStyle(PlainListStyle())
         }
     }
+    
+    private func onPressCategoryListView(avatar: AvatarModel) {
+        path.append(.chat(avatarId: avatar.avatarId))
+    }
 }
 
 #Preview {
-    CategoryListView()
+    CategoryListView(path: .constant([]))
 }
