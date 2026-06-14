@@ -29,7 +29,7 @@ struct AppView: View {
     }
     
     private func checkUserStatus() async {
-        if let user = authService.getAutheticatedUser() {
+        if let user = authService.getAuthenticatedUser() {
             
             print("User already authenticated: \(user.uid)")
             
