@@ -5,7 +5,6 @@
 //  Created by Imalka Muthukumara on 2026-06-12.
 //
 import SwiftUI
-import FirebaseAuth
 
 struct UserAuthInfo: Sendable {
     let uid: String
@@ -28,5 +27,15 @@ struct UserAuthInfo: Sendable {
         self.lastSignInDate = lastSignInDate
     }
     
-   
+    static func mock(isAnonymous: Bool = false) -> Self {
+        UserAuthInfo(
+            uid: "mock_user_123",
+            email: "hello@swiftful-thinking.com",
+            isAnonymous: isAnonymous,
+            creationDate: .now,
+            lastSignInDate: .now
+        )
+    }
+    
 }
+

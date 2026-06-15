@@ -15,8 +15,19 @@ struct AIChatApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AppView()
+            EnviromentBuilderView {
+                AppView()
+            }
         }
+    }
+}
+
+struct EnviromentBuilderView<Content: View>: View {
+    @ViewBuilder var content: () -> Content
+    
+    var body: some View {
+        content()
+            .environment(\.authService, FirebaseAuthService())
     }
 }
 
